@@ -51,7 +51,13 @@ app.use((err, req, res, next) => {
 const startServer = async () => {
     try {
 
-        await pool.query('SELECT NOW()');
+        try {
+    const result = await pool.query('SELECT NOW()');
+    console.log('✅ Database Connected:', result.rows[0]);
+} catch (err) {
+    console.error('❌ Database Connection Failed:', err.message);
+    throw err;
+}
 
         console.log('✅ Database Connection Successful');
 
