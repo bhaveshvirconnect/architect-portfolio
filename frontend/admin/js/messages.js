@@ -9,7 +9,7 @@ async function loadMessages() {
     try {
 
         const response = await fetch(
-            'http://localhost:5000/api/contact',
+            'https://architect-portfolio-9jvz.onrender.com/api/contact',
             {
                 headers: {
                     Authorization: `Bearer ${token}`

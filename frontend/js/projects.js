@@ -2,7 +2,7 @@ window.projectsData = [];
 
 async function loadProjects() {
     try {
-        const response = await fetch('http://localhost:5000/api/projects');
+        const response = await fetch('https://architect-portfolio-9jvz.onrender.com/api/projects');
 
         if (!response.ok) {
             throw new Error(`HTTP Error: ${response.status}`);

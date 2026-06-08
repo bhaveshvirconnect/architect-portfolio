@@ -9,7 +9,7 @@ async function loadDashboard() {
     try {
 
         const projectRes = await fetch(
-            'http://localhost:5000/api/projects',
+            'https://architect-portfolio-9jvz.onrender.com/api/projects',
             {
                 headers: {
                     Authorization: `Bearer ${token}`
@@ -31,7 +31,7 @@ async function loadDashboard() {
         }
 
         const messageRes = await fetch(
-            'http://localhost:5000/api/contact',
+            'https://architect-portfolio-9jvz.onrender.com/api/contact',
             {
                 headers: {
                     Authorization: `Bearer ${token}`

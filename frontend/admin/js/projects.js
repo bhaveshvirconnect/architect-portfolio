@@ -10,7 +10,7 @@ async function loadProjects() {
     try {
 
         const response = await fetch(
-            'http://localhost:5000/api/projects'
+            'https://architect-portfolio-9jvz.onrender.com/api/projects'
         );
 
         const projects = await response.json();
@@ -89,7 +89,7 @@ if (projectForm) {
             try {
 
                 const response = await fetch(
-                    'http://localhost:5000/api/projects',
+                    'https://architect-portfolio-9jvz.onrender.com/api/projects',
                     {
                         method: 'POST',
                         headers: {
@@ -141,7 +141,7 @@ async function deleteProject(id) {
     try {
 
         const response = await fetch(
-            `http://localhost:5000/api/projects/${id}`,
+            `https://architect-portfolio-9jvz.onrender.com/api/projects/${id}`,
             {
                 method: 'DELETE',
                 headers: {
@@ -175,7 +175,7 @@ async function openEditModal(id) {
     try {
 
         const response = await fetch(
-            `http://localhost:5000/api/projects/${id}`
+            `https://architect-portfolio-9jvz.onrender.com/api/projects/${id}`
         );
 
         const project = await response.json();
@@ -255,7 +255,7 @@ async function updateProject() {
     try {
 
         const response = await fetch(
-            `http://localhost:5000/api/projects/${id}`,
+            `https://architect-portfolio-9jvz.onrender.com/api/projects/${id}`,
             {
                 method: 'PUT',
                 headers: {
