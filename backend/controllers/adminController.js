@@ -31,10 +31,17 @@ exports.loginAdmin = async (req, res) => {
 
         const admin = result.rows[0];
 
-        const isMatch = await bcrypt.compare(
-            password,
-            admin.password
-        );
+console.log("Username entered:", username);
+console.log("Admin found:", admin);
+console.log("Password entered:", password);
+console.log("Stored hash:", admin.password);
+
+const isMatch = await bcrypt.compare(
+    password,
+    admin.password
+);
+
+console.log("isMatch:", isMatch);
 
         if (!isMatch) {
             return res.status(401).json({
