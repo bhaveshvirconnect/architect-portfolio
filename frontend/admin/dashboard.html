@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard — Ajay Singh Rathore</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+    <link rel="stylesheet" href="css/admin.css">
+</head>
+<body>
+
+<div class="admin-layout">
+
+    <!-- ===== SIDEBAR ===== -->
+    <aside class="admin-sidebar" id="sidebar">
+        <div class="sidebar-brand">
+            <span class="sidebar-brand-name">ASR</span>
+            <span class="sidebar-brand-sub">Studio Admin</span>
+        </div>
+
+        <nav class="sidebar-nav">
+            <div class="sidebar-section-label">Navigation</div>
+            <a href="dashboard.html" class="sidebar-link active">
+                <i class="fas fa-chart-line"></i> Dashboard
+            </a>
+            <a href="projects.html" class="sidebar-link">
+                <i class="fas fa-layer-group"></i> Projects
+            </a>
+            <a href="messages.html" class="sidebar-link">
+                <i class="fas fa-envelope"></i> Messages
+                <span id="sidebarMsgBadge" style="margin-left:auto;background:var(--accent);color:#000;border-radius:100px;font-size:.6rem;font-weight:600;padding:.15em .55em;display:none;"></span>
+            </a>
+        </nav>
+
+        <div class="sidebar-footer">
+            <button class="btn-logout" onclick="logout()">
+                <i class="fas fa-sign-out-alt"></i> <span>Sign Out</span>
+            </button>
+        </div>
+    </aside>
+
+    <!-- ===== MAIN ===== -->
+    <main class="admin-main">
+
+        <!-- Topbar -->
+        <header class="admin-topbar">
+            <button class="d-md-none" onclick="toggleSidebar()" style="background:none;border:none;color:var(--text-muted);font-size:1.1rem;padding:0;margin-right:.5rem;">
+                <i class="fas fa-bars"></i>
+            </button>
+            <div class="topbar-title">Dashboard</div>
+            <div class="topbar-breadcrumb">
+                <span>Studio</span>
+                <span class="sep">/</span>
+                <span style="color:var(--text);">Overview</span>
+            </div>
+        </header>
+
+        <div class="admin-content">
+
+            <!-- Welcome -->
+            <div style="margin-bottom:2.5rem;">
+                <p style="font-size:.7rem;letter-spacing:.18em;text-transform:uppercase;color:var(--accent);margin-bottom:.4rem;">Welcome back</p>
+                <h2 style="font-size:2.2rem;font-weight:300;color:var(--text);">Studio <em style="font-style:italic;">Overview</em></h2>
+            </div>
+
+            <!-- Stat Cards -->
+            <div class="row g-3 mb-4">
+                <div class="col-sm-6 col-lg-3">
+                    <div class="stat-card">
+                        <div class="stat-icon"><i class="fas fa-layer-group"></i></div>
+                        <div class="stat-value" id="totalProjects">—</div>
+                        <div class="stat-label">Total Projects</div>
+                    </div>
+                </div>
+                <div class="col-sm-6 col-lg-3">
+                    <div class="stat-card">
+                        <div class="stat-icon"><i class="fas fa-envelope"></i></div>
+                        <div class="stat-value" id="totalMessages">—</div>
+                        <div class="stat-label">Total Messages</div>
+                    </div>
+                </div>
+                <div class="col-sm-6 col-lg-3">
+                    <div class="stat-card">
+                        <div class="stat-icon" style="background:rgba(90,184,122,.1);border-color:rgba(90,184,122,.3);">
+                            <i class="fas fa-home" style="color:var(--success);"></i>
+                        </div>
+                        <div class="stat-value" id="totalResidential">—</div>
+                        <div class="stat-label">Residential</div>
+                    </div>
+                </div>
+                <div class="col-sm-6 col-lg-3">
+                    <div class="stat-card">
+                        <div class="stat-icon" style="background:rgba(100,140,220,.1);border-color:rgba(100,140,220,.3);">
+                            <i class="fas fa-building" style="color:#6494dc;"></i>
+                        </div>
+                        <div class="stat-value" id="totalCommercial">—</div>
+                        <div class="stat-label">Commercial</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Quick Actions -->
+            <div class="panel-card mb-4">
+                <div class="panel-card-header">
+                    <span class="panel-card-title">Quick Actions</span>
+                </div>
+                <div class="panel-card-body">
+                    <div class="d-flex flex-wrap gap-3">
+                        <button class="btn-accent" onclick="window.location.href='projects.html'">
+                            <i class="fas fa-layer-group"></i>
+                            <span>Manage Projects</span>
+                        </button>
+                        <button class="btn-ghost" onclick="window.location.href='messages.html'">
+                            <i class="fas fa-envelope"></i>
+                            <span>View Messages</span>
+                        </button>
+                        <a href="../index.html" target="_blank" class="btn-ghost" style="display:inline-flex;align-items:center;gap:8px;">
+                            <i class="fas fa-external-link-alt"></i>
+                            <span>View Site</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Recent Messages Preview -->
+            <div class="panel-card">
+                <div class="panel-card-header">
+                    <span class="panel-card-title">Recent Messages</span>
+                    <a href="messages.html" style="font-size:.68rem;letter-spacing:.12em;text-transform:uppercase;color:var(--accent);">View All →</a>
+                </div>
+                <div class="panel-card-body" style="padding:0;">
+                    <table class="admin-table">
+                        <thead>
+                            <tr>
+                                <th>Name</th>
+                                <th>Email</th>
+                                <th>Project Type</th>
+                                <th>Date</th>
+                            </tr>
+                        </thead>
+                        <tbody id="recentMessages">
+                            <tr>
+                                <td colspan="4">
+                                    <div class="empty-state">
+                                        <i class="fas fa-inbox"></i>
+                                        <p>Loading messages…</p>
+                                    </div>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+        </div><!-- /admin-content -->
+    </main>
+</div>
+
+<!-- Toast -->
+<div class="admin-toast" id="adminToast">
+    <i class="toast-icon fas fa-check-circle"></i>
+    <span class="toast-msg" id="toastMsg"></span>
+</div>
+
+<script>
+function toggleSidebar() {
+    document.getElementById('sidebar').classList.toggle('open');
+}
+function showToast(msg, type='success') {
+    const t = document.getElementById('adminToast');
+    t.querySelector('.toast-msg').textContent = msg;
+    t.className = 'admin-toast show ' + type;
+    t.querySelector('.toast-icon').className = 'toast-icon fas ' + (type === 'success' ? 'fa-check-circle' : 'fa-exclamation-circle');
+    setTimeout(() => t.classList.remove('show'), 3500);
+}
+</script>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+<!-- Route unchanged -->
+<script src="js/dashboard.js"></script>
+</body>
+</html>

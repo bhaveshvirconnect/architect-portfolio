@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Manage Projects — Ajay Singh Rathore</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+    <link rel="stylesheet" href="css/admin.css">
+</head>
+<body>
+
+<div class="admin-layout">
+
+    <!-- ===== SIDEBAR ===== -->
+    <aside class="admin-sidebar" id="sidebar">
+        <div class="sidebar-brand">
+            <span class="sidebar-brand-name">ASR</span>
+            <span class="sidebar-brand-sub">Studio Admin</span>
+        </div>
+        <nav class="sidebar-nav">
+            <div class="sidebar-section-label">Navigation</div>
+            <a href="dashboard.html" class="sidebar-link">
+                <i class="fas fa-chart-line"></i> Dashboard
+            </a>
+            <a href="projects.html" class="sidebar-link active">
+                <i class="fas fa-layer-group"></i> Projects
+            </a>
+            <a href="messages.html" class="sidebar-link">
+                <i class="fas fa-envelope"></i> Messages
+            </a>
+        </nav>
+        <div class="sidebar-footer">
+            <button class="btn-logout" onclick="logout()">
+                <i class="fas fa-sign-out-alt"></i> <span>Sign Out</span>
+            </button>
+        </div>
+    </aside>
+
+    <!-- ===== MAIN ===== -->
+    <main class="admin-main">
+
+        <header class="admin-topbar">
+            <button class="d-md-none" onclick="document.getElementById('sidebar').classList.toggle('open')" style="background:none;border:none;color:var(--text-muted);font-size:1.1rem;padding:0;margin-right:.5rem;">
+                <i class="fas fa-bars"></i>
+            </button>
+            <div class="topbar-title">Projects</div>
+            <div class="topbar-breadcrumb">
+                <a href="dashboard.html"><span>Dashboard</span></a>
+                <span class="sep">/</span>
+                <span style="color:var(--text);">Manage Projects</span>
+            </div>
+        </header>
+
+        <div class="admin-content">
+
+            <!-- Page header -->
+            <div style="margin-bottom:2.5rem;display:flex;align-items:flex-end;justify-content:space-between;flex-wrap:wrap;gap:1rem;">
+                <div>
+                    <p style="font-size:.7rem;letter-spacing:.18em;text-transform:uppercase;color:var(--accent);margin-bottom:.4rem;">Portfolio</p>
+                    <h2 style="font-size:2.2rem;font-weight:300;color:var(--text);">Manage <em style="font-style:italic;">Projects</em></h2>
+                </div>
+                <button class="btn-accent" onclick="document.getElementById('addProjectPanel').scrollIntoView({behavior:'smooth'})">
+                    <i class="fas fa-plus"></i> <span>Add Project</span>
+                </button>
+            </div>
+
+            <!-- Add Project Form -->
+            <div class="panel-card mb-4" id="addProjectPanel">
+                <div class="panel-card-header">
+                    <span class="panel-card-title">Add New Project</span>
+                    <button onclick="togglePanel('addProjectPanel')" style="background:none;border:none;color:var(--text-subtle);cursor:pointer;font-size:.8rem;" title="Collapse">
+                        <i class="fas fa-chevron-up" id="toggleAddIcon"></i>
+                    </button>
+                </div>
+                <div class="panel-card-body" id="addProjectBody">
+                    <form id="projectForm">
+                        <div class="row g-3">
+                            <div class="col-md-6">
+                                <label class="form-label">Project Name *</label>
+                                <input id="name" class="form-control" placeholder="e.g. The Meridian Residence" required>
+                            </div>
+                            <div class="col-md-6">
+                                <label class="form-label">Category</label>
+                                <input id="category" class="form-control" placeholder="e.g. Residential">
+                            </div>
+                            <div class="col-md-6">
+                                <label class="form-label">Location</label>
+                                <input id="location" class="form-control" placeholder="e.g. Jaipur, Rajasthan">
+                            </div>
+                            <div class="col-md-6">
+                                <label class="form-label">Year</label>
+                                <input id="year" class="form-control" placeholder="e.g. 2024">
+                            </div>
+                            <div class="col-md-6">
+                                <label class="form-label">Area</label>
+                                <input id="area" class="form-control" placeholder="e.g. 4,200 sq ft">
+                            </div>
+                            <div class="col-md-6">
+                                <label class="form-label">Client</label>
+                                <input id="client" class="form-control" placeholder="e.g. The Sharma Family">
+                            </div>
+                            <div class="col-12">
+                                <label class="form-label">Description</label>
+                                <textarea id="description" class="form-control" rows="4" placeholder="Describe the project, design approach, materials used…"></textarea>
+                            </div>
+                            <div class="col-md-6">
+                                <label class="form-label">Thumbnail URL</label>
+                                <input id="thumbnail_url" class="form-control" placeholder="https://…">
+                            </div>
+                            <div class="col-md-6">
+                                <label class="form-label">Google Drive Folder Link</label>
+                                <input id="project_link" class="form-control" placeholder="https://drive.google.com/…">
+                            </div>
+                            <div class="col-12">
+                                <label class="form-label">Project Slides URLs <span style="color:var(--text-subtle);font-size:.68rem;letter-spacing:0;text-transform:none;">— one per line</span></label>
+                                <textarea id="slides" class="form-control" rows="5" placeholder="https://image1.jpg&#10;https://image2.jpg&#10;https://image3.jpg"></textarea>
+                            </div>
+                            <div class="col-12 d-flex gap-3">
+                                <button class="btn-accent" type="submit">
+                                    <i class="fas fa-plus"></i> <span>Add Project</span>
+                                </button>
+                                <button class="btn-ghost" type="reset">
+                                    <span>Clear Form</span>
+                                </button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+            <!-- Projects Table -->
+            <div class="panel-card">
+                <div class="panel-card-header">
+                    <span class="panel-card-title">All Projects</span>
+                    <!-- Search -->
+                    <div style="position:relative;">
+                        <i class="fas fa-search" style="position:absolute;left:.85rem;top:50%;transform:translateY(-50%);color:var(--text-subtle);font-size:.75rem;"></i>
+                        <input id="tableSearch" type="text" placeholder="Search…"
+                            style="background:rgba(255,255,255,.03);border:1px solid var(--border-mid);color:var(--text);border-radius:100px;padding:.45rem .9rem .45rem 2.2rem;font-family:'DM Sans',sans-serif;font-size:.78rem;width:180px;transition:border-color .2s;"
+                            oninput="filterTable(this.value)"
+                            onfocus="this.style.borderColor='var(--border-accent)'"
+                            onblur="this.style.borderColor='var(--border-mid)'">
+                    </div>
+                </div>
+                <div style="overflow-x:auto;">
+                    <table class="admin-table">
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>Name</th>
+                                <th>Category</th>
+                                <th>Location</th>
+                                <th>Year</th>
+                                <th style="text-align:right;">Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody id="projectsTable">
+                            <tr>
+                                <td colspan="6">
+                                    <div class="empty-state">
+                                        <i class="fas fa-layer-group"></i>
+                                        <p>Loading projects…</p>
+                                    </div>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+        </div>
+    </main>
+</div>
+
+<!-- Edit Project Modal — IDs unchanged for js/projects.js -->
+<div class="modal fade" id="editProjectModal" tabindex="-1">
+    <div class="modal-dialog modal-lg modal-dialog-centered modal-dialog-scrollable">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Edit Project</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+            </div>
+            <div class="modal-body">
+                <input type="hidden" id="edit_id">
+                <div class="row g-3">
+                    <div class="col-md-6">
+                        <label class="form-label">Project Name</label>
+                        <input id="edit_name" class="form-control" placeholder="Project Name">
+                    </div>
+                    <div class="col-md-6">
+                        <label class="form-label">Category</label>
+                        <input id="edit_category" class="form-control" placeholder="Category">
+                    </div>
+                    <div class="col-md-6">
+                        <label class="form-label">Location</label>
+                        <input id="edit_location" class="form-control" placeholder="Location">
+                    </div>
+                    <div class="col-md-6">
+                        <label class="form-label">Year</label>
+                        <input id="edit_year" class="form-control" placeholder="Year">
+                    </div>
+                    <div class="col-md-6">
+                        <label class="form-label">Area</label>
+                        <input id="edit_area" class="form-control" placeholder="Area">
+                    </div>
+                    <div class="col-md-6">
+                        <label class="form-label">Client</label>
+                        <input id="edit_client" class="form-control" placeholder="Client">
+                    </div>
+                    <div class="col-12">
+                        <label class="form-label">Description</label>
+                        <textarea id="edit_description" class="form-control" rows="4" placeholder="Description"></textarea>
+                    </div>
+                    <div class="col-md-6">
+                        <label class="form-label">Thumbnail URL</label>
+                        <input id="edit_thumbnail_url" class="form-control" placeholder="Thumbnail URL">
+                    </div>
+                    <div class="col-md-6">
+                        <label class="form-label">Google Drive Folder Link</label>
+                        <input id="edit_project_link" class="form-control" placeholder="Google Drive Folder Link">
+                    </div>
+                    <div class="col-12">
+                        <label class="form-label">Project Slides URLs <span style="color:var(--text-subtle);font-size:.68rem;letter-spacing:0;text-transform:none;">— one per line</span></label>
+                        <textarea id="edit_slides" class="form-control" rows="6" placeholder="One URL per line"></textarea>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn-ghost" data-bs-dismiss="modal">
+                    <span>Cancel</span>
+                </button>
+                <button type="button" class="btn-accent" onclick="updateProject()">
+                    <i class="fas fa-save"></i> <span>Save Changes</span>
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Toast -->
+<div class="admin-toast" id="adminToast">
+    <i class="toast-icon fas fa-check-circle"></i>
+    <span class="toast-msg" id="toastMsg"></span>
+</div>
+
+<script>
+// Collapse add-project panel
+function togglePanel(id) {
+    const body = document.getElementById('addProjectBody');
+    const icon = document.getElementById('toggleAddIcon');
+    const collapsed = body.style.display === 'none';
+    body.style.display = collapsed ? '' : 'none';
+    icon.className = collapsed ? 'fas fa-chevron-up' : 'fas fa-chevron-down';
+}
+
+// Client-side table search
+function filterTable(q) {
+    q = q.toLowerCase();
+    document.querySelectorAll('#projectsTable tr').forEach(row => {
+        row.style.display = row.textContent.toLowerCase().includes(q) ? '' : 'none';
+    });
+}
+
+// Toast helper (projects.js can call this)
+function showToast(msg, type='success') {
+    const t = document.getElementById('adminToast');
+    t.querySelector('.toast-msg').textContent = msg;
+    t.className = 'admin-toast show ' + type;
+    t.querySelector('.toast-icon').className = 'toast-icon fas ' + (type === 'success' ? 'fa-check-circle' : 'fa-exclamation-circle');
+    setTimeout(() => t.classList.remove('show'), 3500);
+}
+</script>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+<!-- Route unchanged -->
+<script src="js/projects.js"></script>
+</body>
+</html>
