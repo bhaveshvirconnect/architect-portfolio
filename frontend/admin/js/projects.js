@@ -1,6 +1,6 @@
-const token = localStorage.getItem('adminToken');
+const isLoggedIn = localStorage.getItem('adminLoggedIn');
 
-if (!token) {
+if (isLoggedIn !== 'true') {
     window.location.href = 'login.html';
 }
 
