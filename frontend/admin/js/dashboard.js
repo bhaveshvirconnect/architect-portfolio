@@ -1,9 +1,8 @@
-const token = localStorage.getItem('adminToken');
+const isLoggedIn = localStorage.getItem('adminLoggedIn');
 
-if (!token) {
+if (isLoggedIn !== 'true') {
     window.location.href = 'login.html';
 }
-
 async function loadDashboard() {
 
     try {
@@ -32,11 +31,7 @@ async function loadDashboard() {
 
         const messageRes = await fetch(
             'https://architect-portfolio-9jvz.onrender.com/api/contact',
-            {
-                headers: {
-                    Authorization: `Bearer ${token}`
-                }
-            }
+         
         );
 
         if (messageRes.status === 401) {
@@ -77,9 +72,8 @@ async function loadDashboard() {
         }
     }
 }
-
 function logout() {
-    localStorage.removeItem('adminToken');
+    localStorage.removeItem('adminLoggedIn');
     window.location.href = 'login.html';
 }
 
