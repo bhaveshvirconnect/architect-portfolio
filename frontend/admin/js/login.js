@@ -2,7 +2,7 @@ const form = document.getElementById('loginForm');
 
 if (form) {
 
-    form.addEventListener('submit', async (e) => {
+    form.addEventListener('submit', (e) => {
 
         e.preventDefault();
 
@@ -12,44 +12,23 @@ if (form) {
         const password =
             document.getElementById('password').value;
 
-        try {
-
-            const response = await fetch(
-                'https://architect-portfolio-9jvz.onrender.com/api/admin/login',
-                {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json'
-                    },
-                    body: JSON.stringify({
-                        username,
-                        password
-                    })
-                }
-            );
-
-            const data = await response.json();
-
-            if (!response.ok) {
-                alert(data.message || 'Login failed');
-                return;
-            }
+        if (
+            username === 'admin' &&
+            password === 'admin123'
+        ) {
 
             localStorage.setItem(
-                'adminToken',
-                data.token
+                'adminLoggedIn',
+                'true'
             );
 
             window.location.href =
                 'dashboard.html';
 
-        } catch (error) {
+        } else {
 
-            console.error('Login Error:', error);
+            alert('Invalid credentials');
 
-            alert(
-                'Unable to connect to server. Please try again.'
-            );
         }
     });
 }
