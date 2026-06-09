@@ -13,8 +13,8 @@ if (form) {
             document.getElementById('password').value;
 
         if (
-            username === 'admin' &&
-            password === 'admin123'
+            username === 'bhavesh1' &&
+            password === 'bhavesh1312'
         ) {
 
             localStorage.setItem(
